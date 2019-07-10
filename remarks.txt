@@ -22,3 +22,4 @@ git上传操作
 7.git commit -m "第一次提交"
 8.git remote add origin git@github.com:xyht/react-common.git
 9.git pull --rebase origin master
+10.git push -u origin master //上传

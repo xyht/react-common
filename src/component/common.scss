@@ -1,0 +1,38 @@
+@function px2rem($px){
+  $rem: 37.5px;
+  @return ($px / $rem) + rem;
+}
+
+.clearfix:after {
+  content: '';
+  visibility: hidden;
+  display: block;
+  height: 0;
+  clear: both;
+}
+
+.scale-1px{
+  position: relative;
+  border: none; 
+}
+.scale-1px:after{
+  content: '';
+  position: absolute;
+  height: 1px;
+  width: 100%;
+  bottom: 0;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+  -webkit-transform-origin: 0,0;
+  transform-origin: scaleY(0.5);
+}
+
+.one-line{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.divs{
+  color: aqua;
+}

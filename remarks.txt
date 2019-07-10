@@ -1,0 +1,4 @@
+ncu 查看版本是否有更新
+ncu -u 强制更新package.json
+
+jsx 中图片路径使用src={require('./icon.jpg')}加载

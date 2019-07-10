@@ -2,3 +2,22 @@ ncu 查看版本是否有更新
 ncu -u 强制更新package.json
 
 jsx 中图片路径使用src={require('./icon.jpg')}加载
+
+git上传操作
+1.打开项目所在目录，找到隐藏的.git文件夹。注意这个文件夹是隐藏的，显示隐藏出来就行。
+2.打开文件夹里的config文件，推荐用nodepad++打开。
+3.添加这三行到文件：
+    [user]
+        name = XXX(自己的名称)
+        email = XXXX(邮箱)
+4.配置ssh
+    (1).cd ~/.ssh 或cd .ssh 如果存在文件 rm *
+    (2).cd ~
+    (3).ssh-keygen -t rsa -C "xxxxxx@yy.com" //自己的邮箱
+    (4).一直回车.
+    (5).右上角账号头像的“▼”→Settings→SSH kyes→Add SSH key.
+    (6).把~/.ssh文件夹下以.pub的文件打开复制出来 放在上图的key框中.
+5.git init
+6.git add
+7.git commit -m "第一次提交"
+8.git remote add origin git@github.com:xyht/react-common.git

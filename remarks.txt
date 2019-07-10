@@ -18,6 +18,7 @@ git上传操作
     (5).右上角账号头像的“▼”→Settings→SSH kyes→Add SSH key.
     (6).把~/.ssh文件夹下以.pub的文件打开复制出来 放在上图的key框中.
 5.git init
-6.git add
+6.git add .
 7.git commit -m "第一次提交"
 8.git remote add origin git@github.com:xyht/react-common.git
+9.git pull --rebase origin master

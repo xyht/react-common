@@ -13,7 +13,6 @@ const getHelloData = (state, action) => {
 const helloReducer = (state = initState, action) => {
   switch(action.type){
     case HELLO: return getHelloData(state, action)
-    
     default: return state
   }
 }

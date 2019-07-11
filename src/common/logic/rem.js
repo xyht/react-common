@@ -9,6 +9,3 @@
 
   window.addEventListener('resize', setRemUint)
 })()
-
-var docEl = document.documentElement;
-console.log(docEl.clientWidth / 10)

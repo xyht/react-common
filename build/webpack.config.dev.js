@@ -8,6 +8,7 @@ const pageDir = path.resolve(srcRoot, 'page')
 const mainFile = 'index.js'
 
 function gethtmlArray() {
+  // 得到其中的html文件
   let htmlArray = []
   Object.keys(entryMap).forEach((key) => {
     let fullPathName = path.resolve(pageDir, key)
@@ -56,7 +57,7 @@ module.exports = {
       component: path.resolve(srcRoot, 'component'),
       common: path.resolve(srcRoot, 'common')
     },
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'] //尝试按顺序解决这些扩展
   },
   // 输出
   output: {
@@ -83,7 +84,7 @@ module.exports = {
     ]
   },
 
-  // 抽离多次复用的文件
+  // 抽离多次复用的css文件
   optimization: {
     splitChunks: {
       cacheGroups: {
@@ -96,6 +97,7 @@ module.exports = {
     }
   },
 
+  // webpack插件
   plugins: [
     // 热加载
     new webpack.NamedModulesPlugin(),

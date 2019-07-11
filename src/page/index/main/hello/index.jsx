@@ -12,15 +12,26 @@ class Hello extends React.Component {
     super(props)
     this.fetchData()
   }
-
   fetchData() {
     this.props.dispatch(getHelloData())
   }
 
+  sayHello() {
+    console.log("hello")
+  }
+
+  renderItem = ()=> {
+    return (
+      <div onClick={()=>this.sayHello()}>
+        {this.props.items}        
+      </div>
+    )
+  }
+
   render() {
     return (
-      <div className="hello">
-        {this.props.items}
+      <div className="hello" >
+        {this.renderItem()}
       </div>
     )
   }

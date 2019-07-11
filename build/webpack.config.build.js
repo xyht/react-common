@@ -65,19 +65,21 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.(js|jsx)$/, use: [{ loader: 'babel-loader' },{loader: 'eslint-loader'}], include: srcRoot },
+      { test: /\.(js|jsx)$/, use: [{ loader: 'babel-loader' }, { loader: 'eslint-loader' }], include: srcRoot },
       // 添加css loader
-      { test: /\.css$/, use: [
-        {
-          loader: MiniCssExtractPlugin.loader,
-          options:{
-            publicPath: '../' //不然抽离出css会导致图片位置出错
-          }
-        }, 'css-loader',], include: srcRoot },
+      {
+        test: /\.css$/, use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: '../' //不然抽离出css会导致图片位置出错
+            }
+          }, 'css-loader',], include: srcRoot
+      },
       {
         // 添加scss loader
         test: /\.scss$/, use: [MiniCssExtractPlugin.loader, {
-            loader: 'css-loader', 
+          loader: 'css-loader',
         }, 'sass-loader', {
           loader: 'sass-resources-loader',
           options: {
@@ -95,12 +97,12 @@ module.exports = {
   // 抽离多次复用的文件
   optimization: {
     splitChunks: {
-			chunks: 'all',
-			minSize: 30000,
-			minChunks: 1,
-			maxAsyncRequests: 5,
-			maxInitialRequests: 3,
-			name: true,
+      chunks: 'all',
+      minSize: 30000,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      name: true,
       cacheGroups: {
         common: {
           test: /[\\/]node_modules[\\/]/,
@@ -116,23 +118,23 @@ module.exports = {
     new CleanWebpackPlugin(),
     // 抽离css文件
     new MiniCssExtractPlugin({
-        // Options similar to the same options in webpackOptions.output
-        // both options are optional
-        filename: 'css/[name].[hash].css',
-		}),
-		// 压缩css文件
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: 'css/[name].[hash].css',
+    }),
+    // 压缩css文件
     new OptimizeCssAssetsPlugin({
-        assetNameRegExp: /\.css$/g,
-        cssProcessor: require('cssnano'),
-        cssProcessorPluginOptions: {
-          preset: ['default', { 
-						discardComments: { 
-							removeAll: true 
-						},
-						normalizeUnicode: false
-						}],
-        },
-        canPrint: true
+      assetNameRegExp: /\.css$/g,
+      cssProcessor: require('cssnano'),
+      cssProcessorPluginOptions: {
+        preset: ['default', {
+          discardComments: {
+            removeAll: true
+          },
+          normalizeUnicode: false
+        }],
+      },
+      canPrint: true
     }),
     // 拷贝不变的文件 例如static下的图片资源
     new CopyPlugin([

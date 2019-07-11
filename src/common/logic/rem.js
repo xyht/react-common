@@ -1,4 +1,4 @@
-(function(){
+(function () {
   var docEl = document.documentElement;
 
   function setRemUint() {

@@ -20,10 +20,10 @@ class Hello extends React.Component {
     console.log("hello")
   }
 
-  renderItem = ()=> {
+  renderItem = () => {
     return (
-      <div onClick={()=>this.sayHello()}>
-        {this.props.items}        
+      <div onClick={() => this.sayHello()}>
+        {this.props.items}
       </div>
     )
   }

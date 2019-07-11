@@ -10,13 +10,13 @@ import { store } from './store.js';
 
 
 ReactDom.render(
-    // <HashRouter>
-        <Provider store={store}>
-            {/* <ConnectedRouter history={history}> */}
-            <Container />
-            {/* </ConnectedRouter> */}
-        </Provider>
-    // </HashRouter>
-    ,
-    document.getElementById('root')
+	// <HashRouter>
+	<Provider store={store}>
+		{/* <ConnectedRouter history={history}> */}
+		<Container />
+		{/* </ConnectedRouter> */}
+	</Provider>
+	// </HashRouter>
+	,
+	document.getElementById('root')
 );

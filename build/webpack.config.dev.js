@@ -66,7 +66,7 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.(js|jsx)$/, use: [{ loader: 'babel-loader' },{loader: 'eslint-loader'}], include: srcRoot },
+      { test: /\.(js|jsx)$/, use: [{ loader: 'babel-loader' }, { loader: 'eslint-loader' }], include: srcRoot },
       // 添加css loader
       { test: /\.css$/, use: ['style-loader', 'css-loader',], include: srcRoot },
       {

@@ -7,20 +7,15 @@ const devPath = path.resolve(__dirname, '../dev')
 const pageDir = path.resolve(srcRoot, 'page')
 const mainFile = 'index.js'
 
-function gethtmlArray() {
+function getHtmlArray(entryArray) {
   // 得到其中的html文件
   let htmlArray = []
-  Object.keys(entryMap).forEach((key) => {
-    let fullPathName = path.resolve(pageDir, key)
-    let fileName = path.resolve(fullPathName, key + '.html')
-
-    if (fs.existsSync(fileName)) {
-      htmlArray.push(new HtmlWebpackPlugin({
-        filename: key + '.html',
-        template: fileName,
-        chunks: ['common', key]
-      }))
-    }
+  Object.keys(entryArray).forEach((key) => {
+    htmlArray.push(new HtmlWebpackPlugin({
+      filename: key + '.html',
+      template: 'index.html',
+      chunks: ['common', key]
+    }))
   })
   return htmlArray
 }
@@ -41,8 +36,8 @@ function getEntry() {
   return entryMap
 }
 
-const entryMap = getEntry()
-const htmlArray = gethtmlArray(entryMap)
+const entryArray = getEntry()
+const htmlArray = getHtmlArray(entryArray)
 
 module.exports = {
   mode: 'development',
@@ -51,7 +46,7 @@ module.exports = {
     host: '0.0.0.0',
     hot: true
   },
-  entry: entryMap,
+  entry: entryArray,
   resolve: {
     alias: {
       component: path.resolve(srcRoot, 'component'),
@@ -66,12 +61,28 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.(js|jsx)$/, use: [{ loader: 'babel-loader' }, { loader: 'eslint-loader' }], include: srcRoot },
+      { 
+        test: /\.(js|jsx)$/, 
+        use: [
+          { loader: 'babel-loader' }, 
+          { loader: 'eslint-loader' }
+        ], 
+        include: srcRoot 
+      },
       // 添加css loader
-      { test: /\.css$/, use: ['style-loader', 'css-loader',], include: srcRoot },
+      { 
+        test: /\.css$/, 
+        use: ['style-loader', 'css-loader',], 
+        include: srcRoot 
+      },
       {
         // 添加scss loader
-        test: /\.scss$/, use: ['style-loader', 'css-loader', 'sass-loader', {
+        test: /\.scss$/, 
+        use: [
+          'style-loader', 
+          'css-loader', 
+          'sass-loader', 
+          {
           loader: 'sass-resources-loader',
           options: {
             // 添加公共样式
@@ -80,7 +91,11 @@ module.exports = {
         }], include: srcRoot
       },
       // 压缩图片test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-      { test: /\.(png|jpe?g|gif|svg)(\?.*)?$/, use: 'url-loader?limit=8192', include: srcRoot }
+      { 
+        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/, 
+        use: 'url-loader?limit=8192', 
+        include: srcRoot 
+      }
     ]
   },
 

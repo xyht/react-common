@@ -17,12 +17,14 @@ class Hello extends React.Component {
   }
 
   sayHello() {
-    console.log("hello")
+    import(/* webpackPrefetch: true */ './sayHello.js').then(({default: func}) => {
+      func();
+    })
   }
 
   renderItem = () => {
     return (
-      <div onClick={() => this.sayHello()}>
+      <div onClick={() => this.sayHello()} className="divs">
         {this.props.items}
       </div>
     )

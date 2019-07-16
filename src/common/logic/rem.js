@@ -3,6 +3,7 @@
 
   function setRemUint() {
     var rem = docEl.clientWidth / 10;
+    console.log(rem)
     docEl.style.fontSize = rem + 'px'
   }
   setRemUint()

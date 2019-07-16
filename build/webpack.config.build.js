@@ -1,4 +1,3 @@
-const webpack = require('webpack')
 const path = require('path')
 const CopyPlugin = require('copy-webpack-plugin');//静态文件复制
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');//css压缩
@@ -11,19 +10,15 @@ const distPath = path.resolve(__dirname, '../dist')
 const pageDir = path.resolve(srcRoot, 'page')
 const mainFile = 'index.js'
 
-function gethtmlArray() {
+function getHtmlArray(entryArray) {
+  // 得到其中的html文件
   let htmlArray = []
-  Object.keys(entryMap).forEach((key) => {
-    let fullPathName = path.resolve(pageDir, key)
-    let fileName = path.resolve(fullPathName, key + '.html')
-
-    if (fs.existsSync(fileName)) {
-      htmlArray.push(new HtmlWebpackPlugin({
-        filename: key + '.html',
-        template: fileName,
-        chunks: ['common', key]
-      }))
-    }
+  Object.keys(entryArray).forEach((key) => {
+    htmlArray.push(new HtmlWebpackPlugin({
+      filename: key + '.html',
+      template: 'index.html',
+      chunks: ['common', key]
+    }))
   })
   return htmlArray
 }
@@ -44,12 +39,12 @@ function getEntry() {
   return entryMap
 }
 
-const entryMap = getEntry()
-const htmlArray = gethtmlArray(entryMap)
+const entryArray = getEntry()
+const htmlArray = getHtmlArray(entryArray)
 
 module.exports = {
   mode: 'production',
-  entry: entryMap,
+  entry: entryArray,
   resolve: {
     alias: {
       component: path.resolve(srcRoot, 'component'),
@@ -65,7 +60,13 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.(js|jsx)$/, use: [{ loader: 'babel-loader' }, { loader: 'eslint-loader' }], include: srcRoot },
+      { 
+        test: /\.(js|jsx)$/, 
+        use: [
+          { loader: 'babel-loader' }, 
+          { loader: 'eslint-loader' }
+        ], 
+        include: srcRoot },
       // 添加css loader
       {
         test: /\.css$/, use: [
@@ -78,9 +79,12 @@ module.exports = {
       },
       {
         // 添加scss loader
-        test: /\.scss$/, use: [MiniCssExtractPlugin.loader, {
+        test: /\.scss$/, use: [MiniCssExtractPlugin.loader, 
+        {
           loader: 'css-loader',
-        }, 'sass-loader', {
+        }, 
+        'sass-loader', 
+        {
           loader: 'sass-resources-loader',
           options: {
             // 添加公共样式函数
@@ -90,7 +94,10 @@ module.exports = {
       },
       // 压缩图片
       //?limit=8192&name=./images/[name].[hash].[ext]
-      { test: /\.(png|jpg|jpeg)$/, use: 'url-loader', include: srcRoot }
+      { 
+        test: /\.(png|jpg|jpeg)$/, 
+        use: 'url-loader', include: srcRoot 
+      }
     ]
   },
 
@@ -138,8 +145,14 @@ module.exports = {
     }),
     // 拷贝不变的文件 例如static下的图片资源
     new CopyPlugin([
-      { from: path.resolve(__dirname, '../dev/json'), to: path.resolve(distPath, 'json') },
-      { from: path.resolve(__dirname, '../src/static'), to: path.resolve(distPath, 'static') },
+      { 
+        from: path.resolve(__dirname, '../dev/json'), 
+        to: path.resolve(distPath, 'json') 
+      },
+      { 
+        from: path.resolve(__dirname, '../src/static'), 
+        to: path.resolve(distPath, 'static') 
+      },
     ]),
   ].concat(htmlArray)
 }
